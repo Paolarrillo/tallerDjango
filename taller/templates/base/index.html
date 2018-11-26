@@ -1,0 +1,42 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <!-- Estilos para todas las paginas que hereden de esta plantilla -->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+
+    <!-- Bloque para incrustar otros css diferentes por pagina -->
+    {% block extracss %}<link rel="stylesheet" type="text/css" href="{% static 'css2/basic_style.css' %}">{% endblock %}
+    <title>{% block title %}Tienda{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      {% block header %}
+        {% include 'base/nav.html' %}
+      {% endblock %}
+    </header>
+
+    <div class="center">
+      {% block content %}
+        Contenido de la página
+      {% endblock %}
+    </div>
+
+    <!-- {% block footer %}
+      <footer class="foot">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            {% block links %}
+              <li class="breadcrumb-item"><a href="{% url 'producto:productos' %}">Productos</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Categorias</li>
+            {% endblock %}
+          </ol>
+        </nav>
+      </footer>
+    {% endblock %} -->
+  </body>
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+</html>

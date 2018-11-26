@@ -1,0 +1,53 @@
+{% extends 'base/index.html' %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="info">
+    <table class="table table-dark text-center">
+      <tr id="titulo">
+        <th scope="col">Producto</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Costo</th>
+        <th scope="col">Disponible</th>
+        <th scope="col">Existencias</th>
+        <th scope = "col">acciones</th>
+      </tr>
+    {% for producto in productos %}
+      <tr id="cuerpo">
+        <th scope="col">
+          <p>{{producto.nombreProducto}}</p>
+        </th>
+        <th scope="col">
+          <p>{{producto.descripcion}}</p>
+        </th>
+        <th scope="col">
+          <p>{{producto.costo}}</p>
+        </th>
+        <th scope="col">
+          {% if producto.disponible %}
+          <p>Si</p>
+          {% else %}
+          <p>No</p>
+          {% endif %}
+        </th>
+        <th scope="col">
+          <p>{{producto.n_existencias}}</p>
+        </th>
+        <th>
+          <a href="{% url 'producto:editarRegistro' idProducto=producto.id %}" class="btn mb-3">Editar</a>
+          <a href="{% url 'producto:eliminarRegistro' idProducto=producto.id %}" class="btn mb-3">Borrar</a>
+        </th>
+      </tr>
+
+    {% empty %}
+    	<p>No hay productos</p>
+    {% endfor %}
+  </table>
+  <a href="{% url 'producto:nuevoRegistro' %}"class="btn btn-primary">Nuevo Registro</a>
+  </div>
+
+{% endblock %}
+  <!-- {% block links %}
+    <li class="breadcrumb-item"><a href="{% url 'producto:categorias' %}">Categorias</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Productos</li>
+  {% endblock %} -->
